@@ -10,8 +10,8 @@
             text-align: center;
             font-family: 'Inter', sans-serif;
             background-color: #fff5f8;
-            margin: 0;
-            padding: 40px 20px;
+            margin-top: 80px;
+            overflow: hidden;
         }
 
         h1 {
@@ -22,27 +22,24 @@
             color: #222;
         }
 
-        .main-gif {
-            width: 420px;
-            margin: 30px 0;
+        img {
+            width: 300px;
+            margin: 40px 0;
             border-radius: 12px;
         }
 
         .buttons {
             position: relative;
-            height: 250px;
-            margin-top: 30px;
+            height: 400px;
         }
 
         button {
-            padding: 15px 35px;
+            padding: 15px 30px;
             border-radius: 40px;
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
-            text-transform: uppercase;
-            font-weight: 600;
         }
 
         #yes {
@@ -50,7 +47,7 @@
             color: white;
             font-size: 20px;
             position: absolute;
-            left: 30%;
+            left: 40%;
             top: 50%;
         }
 
@@ -64,12 +61,13 @@
             top: 50%;
         }
 
+        /* Grid sushi */
         .sushi-grid {
             display: grid;
-            grid-template-columns: repeat(2, 220px);
-            gap: 25px;
+            grid-template-columns: repeat(2, 200px);
+            gap: 30px;
             justify-content: center;
-            margin-top: 40px;
+            margin-top: 50px;
         }
 
         .sushi-item {
@@ -77,22 +75,23 @@
         }
 
         .sushi-item img {
-            width: 220px;
-            height: 160px;
+            width: 200px;
+            height: 150px;
             object-fit: cover;
             border-radius: 15px;
         }
 
-        .small-gif {
-            width: 260px;
-            margin-top: 30px;
+        .sushi-item p {
+            margin-top: 10px;
+            font-weight: 600;
         }
+
     </style>
 </head>
 
 <body>
 
-<div id="content">
+<div id="main-content">
 
     <h1>
         Iba a pedirte tu Letterboxd, pero mejor aprovecho la oportunidad 
@@ -101,7 +100,7 @@
         Com ho veus?
     </h1>
 
-    <img src="nottinghill.gif" class="main-gif">
+    <img src="nottinghill.gif">
 
     <div class="buttons">
         <button id="yes">Sí</button>
@@ -114,7 +113,6 @@
 
 let yesButton = document.getElementById("yes");
 let noButton = document.getElementById("no");
-let container = document.querySelector(".buttons");
 
 let yesSize = 20;
 let noClicks = 0;
@@ -125,18 +123,18 @@ noButton.addEventListener("click", function() {
 
     noClicks++;
 
-    yesSize += 30;
+    // hacer crecer mucho el Sí
+    yesSize += 35;
     yesButton.style.fontSize = yesSize + "px";
 
-    let maxX = container.clientWidth - noButton.offsetWidth;
-    let maxY = container.clientHeight - noButton.offsetHeight;
-
-    let randomX = Math.random() * maxX;
-    let randomY = Math.random() * maxY;
+    // mover No random por la pantalla
+    let randomX = Math.random() * (window.innerWidth - 100);
+    let randomY = Math.random() * (window.innerHeight - 50);
 
     noButton.style.left = randomX + "px";
     noButton.style.top = randomY + "px";
 
+    // al décimo clic desaparece
     if (noClicks === 10) {
         noButton.style.display = "none";
     }
@@ -144,12 +142,17 @@ noButton.addEventListener("click", function() {
 
 yesButton.addEventListener("click", function() {
 
-    document.getElementById("content").innerHTML = `
-        <h1>Bona elecció, sabes lo que te haces.</h1>
-        <img src="spiderman.gif" class="main-gif">
+    document.body.innerHTML = `
+        <h1 style="margin-top:100px;">
+            bona elecció, para nada obligada ehh
+        </h1>
+
+        <img src="colocar gift spiderman">
+
         <br>
+
         <button onclick="goNext()" 
-        style="margin-top:25px; background:#ff4f87; color:white; font-size:18px; border:none; padding:15px 30px; border-radius:40px; cursor:pointer;">
+        style="margin-top:30px; background:#ff4f87; color:white; font-size:18px; border:none; padding:15px 30px; border-radius:40px; cursor:pointer;">
             CLICA AQUÍ
         </button>
     `;
@@ -157,9 +160,9 @@ yesButton.addEventListener("click", function() {
 
 function goNext() {
 
-    document.getElementById("content").innerHTML = `
-        <h1>
-            Para celebrar ese "sí", después de la peli te invito a cenar. Eliges tú.
+    document.body.innerHTML = `
+        <h1 style="margin-top:60px;">
+            Para celebrar ese sí, después de la peli te invito a cenar
         </h1>
 
         <div class="sushi-grid">
@@ -186,15 +189,15 @@ function goNext() {
 
         </div>
 
-        <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHQxam1vbmJkMjBmMDdpYXYwM2F5ZWVzdXJveWR1OWg3YWg1c3BobCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/H986cBWlQH0PXjcLQO/giphy.gif" class="small-gif">
+        <img src="yoda.gif" style="margin-top:50px;">
     `;
 }
 
 function finalScreen() {
 
-    document.getElementById("content").innerHTML = `
-        <h1 style="margin-top:100px;">
-            Bof sushi, que top. 😌
+    document.body.innerHTML = `
+        <h1 style="margin-top:120px;">
+            boff, sushi que toop 😌
         </h1>
     `;
 }
