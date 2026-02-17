@@ -1,0 +1,90 @@
+index.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Una pregunta importante 💌</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 60px;
+            background-color: #fff0f5;
+        }
+
+        h1 {
+            padding: 0 20px;
+        }
+
+        img {
+            width: 300px;
+            margin: 30px 0;
+        }
+
+        button {
+            font-size: 20px;
+            padding: 15px 30px;
+            margin: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            border-radius: 10px;
+        }
+
+        #yes {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #no {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-content">
+        <h1>
+            Iba a pedirte tu Letterboxd, pero mejor aprovecho la oportunidad para proponerte ver una peli juntos.  
+            El 31 de Julio, por ejemplo.  
+            Com ho veus? 
+        </h1>
+
+        <!-- GIF aquí -->
+        <img src="https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif" alt="romantic gif">
+
+        <div>
+            <button id="yes">Sí 💚</button>
+            <button id="no">No 💔</button>
+        </div>
+    </div>
+
+    <script>
+        let yesButton = document.getElementById("yes");
+        let noButton = document.getElementById("no");
+
+        let yesSize = 20;
+        let noSize = 20;
+
+        noButton.addEventListener("click", function() {
+            yesSize += 8;
+            noSize -= 4;
+
+            yesButton.style.fontSize = yesSize + "px";
+            noButton.style.fontSize = noSize + "px";
+
+            if (noSize <= 8) {
+                noButton.style.display = "none";
+            }
+        });
+
+        yesButton.addEventListener("click", function() {
+            document.body.innerHTML = `
+                <h1>Sabía 🎉🎉🎉🎉🎉</h1>
+                <img src="https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif" width="350">
+            `;
+        });
+    </script>
+
+</body>
+</html>
