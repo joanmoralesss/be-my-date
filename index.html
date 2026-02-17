@@ -11,7 +11,7 @@
             font-family: 'Inter', sans-serif;
             background-color: #fff5f8;
             margin: 0;
-            padding: 80px 20px;
+            padding: 40px 20px;
         }
 
         h1 {
@@ -22,26 +22,27 @@
             color: #222;
         }
 
-        img {
-            width: 300px;
-            margin: 40px 0;
+        .main-gif {
+            width: 420px;
+            margin: 30px 0;
             border-radius: 12px;
         }
 
         .buttons {
             position: relative;
-            height: 300px;
-            margin-top: 40px;
+            height: 250px;
+            margin-top: 30px;
         }
 
         button {
-            padding: 15px 30px;
+            padding: 15px 35px;
             border-radius: 40px;
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
             text-transform: uppercase;
+            font-weight: 600;
         }
 
         #yes {
@@ -67,7 +68,7 @@
         .sushi-grid {
             display: grid;
             grid-template-columns: repeat(2, 220px);
-            gap: 30px;
+            gap: 25px;
             justify-content: center;
             margin-top: 40px;
         }
@@ -84,8 +85,13 @@
         }
 
         .sushi-item p {
-            margin-top: 10px;
+            margin-top: 8px;
             font-weight: 600;
+        }
+
+        .small-gif {
+            width: 260px;
+            margin-top: 30px;
         }
 
     </style>
@@ -93,7 +99,7 @@
 
 <body>
 
-<div id="main-content">
+<div id="content">
 
     <h1>
         Iba a pedirte tu Letterboxd, pero mejor aprovecho la oportunidad 
@@ -102,7 +108,7 @@
         Com ho veus?
     </h1>
 
-    <img src="nottinghill.gif">
+    <img src="nottinghill.gif" class="main-gif">
 
     <div class="buttons">
         <button id="yes">Sí</button>
@@ -145,17 +151,17 @@ noButton.addEventListener("click", function() {
 
 yesButton.addEventListener("click", function() {
 
-    document.body.innerHTML = `
-        <h1 style="margin-top:80px;">
+    document.getElementById("content").innerHTML = `
+        <h1 style="margin-top:40px;">
             Bona elecció, sabes lo que te haces.
         </h1>
 
-        <img src="spiderman-dancing.gif">
+        <img src="spiderman dancing.gif" class="main-gif">
 
         <br>
 
         <button onclick="goNext()" 
-        style="margin-top:30px; background:#ff4f87; color:white; font-size:18px; border:none; padding:15px 30px; border-radius:40px; cursor:pointer;">
+        style="margin-top:25px; background:#ff4f87; color:white; font-size:18px; border:none; padding:15px 30px; border-radius:40px; cursor:pointer;">
             CLICA AQUÍ
         </button>
     `;
@@ -163,48 +169,39 @@ yesButton.addEventListener("click", function() {
 
 function goNext() {
 
-    document.body.innerHTML = `
-        <h1 style="margin-top:40px;">
+    document.getElementById("content").innerHTML = `
+        <h1>
             Para celebrar ese "sí", después de la peli te invito a cenar. Eliges tú.
         </h1>
 
         <div class="sushi-grid">
 
             <div class="sushi-item" onclick="finalScreen()">
-                <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c">
+                <img src="SUSHI 1.jpeg">
                 <p>Sushi</p>
             </div>
 
             <div class="sushi-item" onclick="finalScreen()">
-                <img src="https://images.unsplash.com/photo-1553621042-f6e147245754">
+                <img src="SUSHI 2.jpg">
                 <p>Sushi</p>
             </div>
 
             <div class="sushi-item" onclick="finalScreen()">
-                <img src="https://images.unsplash.com/photo-1582450871972-ab5ca641643d">
+                <img src="SUSHI 3.jpg">
                 <p>Sushi</p>
             </div>
 
             <div class="sushi-item" onclick="finalScreen()">
-                <img src="https://images.unsplash.com/photo-1562158070-57b5b06e5097">
+                <img src="SUSHI 4.jpg">
                 <p>Sushi</p>
             </div>
 
         </div>
 
-        <img src="https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif" style="margin-top:40px;">
+        <img src="spiderman dancing.gif" class="small-gif">
     `;
 }
 
 function finalScreen() {
-    document.body.innerHTML = `
-        <h1 style="margin-top:120px;">
-            Bof sushi, que top. 😌
-        </h1>
-    `;
-}
 
-</script>
-
-</body>
-</html>
+    docum
