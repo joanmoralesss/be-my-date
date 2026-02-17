@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Una pregunta importante 💌</title>
+    <title>jajaja perdó per la frikada :) </title>
     <style>
         body {
             text-align: center;
             font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #fafafa;
+            background-color: #fff5f8; /* blanco con toque rosa */
             margin-top: 80px;
             overflow: hidden;
         }
@@ -16,17 +16,18 @@
             padding: 0 30px;
             max-width: 700px;
             margin: 0 auto;
+            color: #333;
         }
 
         img {
             width: 280px;
             margin: 40px 0;
-            border-radius: 10px;
+            border-radius: 12px;
         }
 
         .buttons {
             position: relative;
-            height: 150px;
+            height: 200px;
         }
 
         button {
@@ -34,21 +35,23 @@
             padding: 14px 28px;
             margin: 15px;
             cursor: pointer;
-            border-radius: 30px;
-            border: 1px solid black;
-            background-color: white;
+            border-radius: 40px;
+            border: none;
             transition: all 0.3s ease;
+            position: absolute;
         }
 
         #yes {
-            background-color: black;
+            background-color: #ff4f87; /* rosa elegante */
             color: white;
+            left: 40%;
         }
 
         #no {
-            position: absolute;
+            background-color: white;
+            color: black;
+            border: 1px solid #ccc;
             left: 55%;
-            top: 0;
         }
     </style>
 </head>
@@ -61,7 +64,8 @@
             Com ho veus?
         </h1>
 
-        <img src="https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif">
+        <!-- GIF INICIAL -->
+        <img id="main-gif" src="nottinghill.gif">
 
         <div class="buttons">
             <button id="yes">Sí</button>
@@ -75,22 +79,21 @@
 
         let yesSize = 18;
         let noSize = 18;
-        let clickCount = 0;
 
         noButton.addEventListener("click", function() {
-            clickCount++;
 
-            yesSize += 4;
-            noSize -= 3;
+            yesSize += 12;  // MÁS exagerado
+            noSize -= 4;
 
             yesButton.style.fontSize = yesSize + "px";
             noButton.style.fontSize = noSize + "px";
 
-            // Movimiento romántico elegante
-            let randomX = Math.random() * 200 - 100;
-            let randomY = Math.random() * 100;
+            // Movimiento aleatorio real por la pantalla
+            let randomX = Math.random() * (window.innerWidth - 150);
+            let randomY = Math.random() * (window.innerHeight - 100);
 
-            noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            noButton.style.left = randomX + "px";
+            noButton.style.top = randomY + "px";
 
             if (noSize <= 10) {
                 noButton.style.display = "none";
@@ -99,10 +102,10 @@
 
         yesButton.addEventListener("click", function() {
             document.body.innerHTML = `
-                <h1 style="margin-top:100px; font-weight:400;">
-                    Sabía que dirías que sí 🎬✨
+                <h1 style="margin-top:100px; font-weight:400; color:#333;">
+                    Para nada obligada eh jajaja, se celebra igualment 
                 </h1>
-                <img src="https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif" width="320">
+                <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHQxam1vbmJkMjBmMDdpYXYwM2F5ZWVzdXJveWR1OWg3YWg1c3BobCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/H986cBWlQH0PXjcLQO/giphy.gif" width="320">
             `;
         });
     </script>
