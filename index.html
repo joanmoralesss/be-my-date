@@ -10,8 +10,8 @@
             text-align: center;
             font-family: 'Inter', sans-serif;
             background-color: #fff5f8;
-            margin-top: 80px;
-            overflow: hidden;
+            margin: 0;
+            padding: 60px 20px;
         }
 
         h1 {
@@ -23,23 +23,29 @@
         }
 
         img {
-            width: 300px;
-            margin: 40px 0;
             border-radius: 12px;
+        }
+
+        .main-gif {
+            width: 420px;
+            margin: 40px 0;
         }
 
         .buttons {
             position: relative;
-            height: 400px;
+            height: 300px;
+            margin-top: 30px;
         }
 
         button {
-            padding: 15px 30px;
+            padding: 15px 35px;
             border-radius: 40px;
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            font-weight: 600;
         }
 
         #yes {
@@ -47,7 +53,7 @@
             color: white;
             font-size: 20px;
             position: absolute;
-            left: 40%;
+            left: 30%;
             top: 50%;
         }
 
@@ -61,13 +67,18 @@
             top: 50%;
         }
 
-        /* Grid sushi */
+        .layout-row {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
         .sushi-grid {
             display: grid;
             grid-template-columns: repeat(2, 200px);
-            gap: 30px;
-            justify-content: center;
-            margin-top: 50px;
+            gap: 25px;
         }
 
         .sushi-item {
@@ -78,12 +89,18 @@
             width: 200px;
             height: 150px;
             object-fit: cover;
-            border-radius: 15px;
         }
 
         .sushi-item p {
-            margin-top: 10px;
+            margin-top: 8px;
             font-weight: 600;
+        }
+
+        .final-text {
+            max-width: 700px;
+            margin: 30px auto;
+            font-size: 16px;
+            line-height: 1.6;
         }
 
     </style>
@@ -91,7 +108,7 @@
 
 <body>
 
-<div id="main-content">
+<div id="content">
 
     <h1>
         Iba a pedirte tu Letterboxd, pero mejor aprovecho la oportunidad 
@@ -100,7 +117,7 @@
         Com ho veus?
     </h1>
 
-    <img src="nottinghill.gif">
+    <img src="nottinghill.gif" class="main-gif">
 
     <div class="buttons">
         <button id="yes">Sí</button>
@@ -113,9 +130,11 @@
 
 let yesButton = document.getElementById("yes");
 let noButton = document.getElementById("no");
+let container = document.querySelector(".buttons");
 
 let yesSize = 20;
 let noClicks = 0;
+let initialTop = noButton.offsetTop;
 
 noButton.addEventListener("click", function() {
 
@@ -123,18 +142,18 @@ noButton.addEventListener("click", function() {
 
     noClicks++;
 
-    // hacer crecer mucho el Sí
     yesSize += 35;
     yesButton.style.fontSize = yesSize + "px";
 
-    // mover No random por la pantalla
-    let randomX = Math.random() * (window.innerWidth - 100);
-    let randomY = Math.random() * (window.innerHeight - 50);
+    let maxX = container.clientWidth - noButton.offsetWidth;
+    let maxY = initialTop; // NO no puede bajar más de su posición inicial
+
+    let randomX = Math.random() * maxX;
+    let randomY = Math.random() * maxY;
 
     noButton.style.left = randomX + "px";
     noButton.style.top = randomY + "px";
 
-    // al décimo clic desaparece
     if (noClicks === 10) {
         noButton.style.display = "none";
     }
@@ -142,12 +161,12 @@ noButton.addEventListener("click", function() {
 
 yesButton.addEventListener("click", function() {
 
-    document.body.innerHTML = `
-        <h1 style="margin-top:100px;">
+    document.getElementById("content").innerHTML = `
+        <h1 style="margin-top:80px;">
             bona elecció, para nada obligada ehh
         </h1>
 
-        <img src="spiderman.gif">
+        <img src="spiderman.gif" style="width:500px; margin:40px 0;">
 
         <br>
 
@@ -160,45 +179,55 @@ yesButton.addEventListener("click", function() {
 
 function goNext() {
 
-    document.body.innerHTML = `
-        <h1 style="margin-top:60px;">
+    document.getElementById("content").innerHTML = `
+        <h1>
             Para celebrar ese sí, después de la peli te invito a cenar
         </h1>
 
-        <div class="sushi-grid">
+        <div class="layout-row">
 
-            <div class="sushi-item" onclick="finalScreen()">
-                <img src="sushi1.jpg">
-                <p>Sushi</p>
-            </div>
+            <img src="yoda.gif" style="width:250px;">
 
-            <div class="sushi-item" onclick="finalScreen()">
-                <img src="sushi2.jpg">
-                <p>Sushi</p>
-            </div>
+            <div class="sushi-grid">
 
-            <div class="sushi-item" onclick="finalScreen()">
-                <img src="sushi3.jpg">
-                <p>Sushi</p>
-            </div>
+                <div class="sushi-item" onclick="finalScreen()">
+                    <img src="sushi1.jpg">
+                    <p>Sushi</p>
+                </div>
 
-            <div class="sushi-item" onclick="finalScreen()">
-                <img src="sushi4.jpg">
-                <p>Sushi</p>
+                <div class="sushi-item" onclick="finalScreen()">
+                    <img src="sushi2.jpg">
+                    <p>Sushi</p>
+                </div>
+
+                <div class="sushi-item" onclick="finalScreen()">
+                    <img src="sushi3.jpg">
+                    <p>Sushi</p>
+                </div>
+
+                <div class="sushi-item" onclick="finalScreen()">
+                    <img src="sushi4.jpg">
+                    <p>Sushi</p>
+                </div>
+
             </div>
 
         </div>
-
-        <img src="yoda.gif" style="margin-top:50px;">
     `;
 }
 
 function finalScreen() {
 
-    document.body.innerHTML = `
-        <h1 style="margin-top:120px;">
+    document.getElementById("content").innerHTML = `
+        <h1 style="margin-top:100px;">
             boff, sushi que toop 😌
         </h1>
+
+        <div class="final-text">
+            Y hasta aquí. Quizás no le tengas mucha fe a los hombres pero espero al menos haberte sacado una sonrisa y que hayas podido ver que algo diferente soy.<br><br>
+            Y tan diferente que soy la cabra, y ya sabes lo que dicen: la felicidad no es felicidad sin una cabra tocando el violín 
+            (lo de tocar el violín ya se me complica un poco más eso sí, pero todo es ponerse).
+        </div>
     `;
 }
 
