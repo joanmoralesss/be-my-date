@@ -64,7 +64,6 @@
             top: 50%;
         }
 
-        /* Grid sushi */
         .sushi-grid {
             display: grid;
             grid-template-columns: repeat(2, 220px);
@@ -84,16 +83,10 @@
             border-radius: 15px;
         }
 
-        .sushi-item p {
-            margin-top: 8px;
-            font-weight: 600;
-        }
-
         .small-gif {
             width: 260px;
             margin-top: 30px;
         }
-
     </style>
 </head>
 
@@ -152,14 +145,9 @@ noButton.addEventListener("click", function() {
 yesButton.addEventListener("click", function() {
 
     document.getElementById("content").innerHTML = `
-        <h1 style="margin-top:40px;">
-            Bona elecció, sabes lo que te haces.
-        </h1>
-
-        <img src="spiderman dancing.gif" class="main-gif">
-
+        <h1>Bona elecció, sabes lo que te haces.</h1>
+        <img src="spiderman.gif" class="main-gif">
         <br>
-
         <button onclick="goNext()" 
         style="margin-top:25px; background:#ff4f87; color:white; font-size:18px; border:none; padding:15px 30px; border-radius:40px; cursor:pointer;">
             CLICA AQUÍ
@@ -177,22 +165,22 @@ function goNext() {
         <div class="sushi-grid">
 
             <div class="sushi-item" onclick="finalScreen()">
-                <img src="SUSHI 1.jpeg">
+                <img src="sushi1.jpg">
                 <p>Sushi</p>
             </div>
 
             <div class="sushi-item" onclick="finalScreen()">
-                <img src="SUSHI 2.jpg">
+                <img src="sushi2.jpg">
                 <p>Sushi</p>
             </div>
 
             <div class="sushi-item" onclick="finalScreen()">
-                <img src="SUSHI 3.jpg">
+                <img src="sushi3.jpg">
                 <p>Sushi</p>
             </div>
 
             <div class="sushi-item" onclick="finalScreen()">
-                <img src="SUSHI 4.jpg">
+                <img src="sushi4.jpg">
                 <p>Sushi</p>
             </div>
 
@@ -204,4 +192,14 @@ function goNext() {
 
 function finalScreen() {
 
-    docum
+    document.getElementById("content").innerHTML = `
+        <h1 style="margin-top:100px;">
+            Bof sushi, que top. 😌
+        </h1>
+    `;
+}
+
+</script>
+
+</body>
+</html>
