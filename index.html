@@ -10,8 +10,8 @@
             text-align: center;
             font-family: 'Inter', sans-serif;
             background-color: #fff5f8;
-            margin-top: 80px;
-            overflow: hidden;
+            margin: 0;
+            padding: 80px 20px;
         }
 
         h1 {
@@ -30,7 +30,8 @@
 
         .buttons {
             position: relative;
-            height: 400px;
+            height: 300px;
+            margin-top: 40px;
         }
 
         button {
@@ -40,6 +41,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
         }
 
         #yes {
@@ -47,7 +49,7 @@
             color: white;
             font-size: 20px;
             position: absolute;
-            left: 40%;
+            left: 30%;
             top: 50%;
         }
 
@@ -64,10 +66,10 @@
         /* Grid sushi */
         .sushi-grid {
             display: grid;
-            grid-template-columns: repeat(2, 200px);
+            grid-template-columns: repeat(2, 220px);
             gap: 30px;
             justify-content: center;
-            margin-top: 50px;
+            margin-top: 40px;
         }
 
         .sushi-item {
@@ -75,8 +77,8 @@
         }
 
         .sushi-item img {
-            width: 200px;
-            height: 150px;
+            width: 220px;
+            height: 160px;
             object-fit: cover;
             border-radius: 15px;
         }
@@ -113,6 +115,7 @@
 
 let yesButton = document.getElementById("yes");
 let noButton = document.getElementById("no");
+let container = document.querySelector(".buttons");
 
 let yesSize = 20;
 let noClicks = 0;
@@ -123,18 +126,18 @@ noButton.addEventListener("click", function() {
 
     noClicks++;
 
-    // hacer crecer mucho el Sí
-    yesSize += 35;
+    yesSize += 30;
     yesButton.style.fontSize = yesSize + "px";
 
-    // mover No random por la pantalla
-    let randomX = Math.random() * (window.innerWidth - 100);
-    let randomY = Math.random() * (window.innerHeight - 50);
+    let maxX = container.clientWidth - noButton.offsetWidth;
+    let maxY = container.clientHeight - noButton.offsetHeight;
+
+    let randomX = Math.random() * maxX;
+    let randomY = Math.random() * maxY;
 
     noButton.style.left = randomX + "px";
     noButton.style.top = randomY + "px";
 
-    // al décimo clic desaparece
     if (noClicks === 10) {
         noButton.style.display = "none";
     }
@@ -143,11 +146,11 @@ noButton.addEventListener("click", function() {
 yesButton.addEventListener("click", function() {
 
     document.body.innerHTML = `
-        <h1 style="margin-top:100px;">
-            bona elecció, sabes lo que te haces. 
+        <h1 style="margin-top:80px;">
+            Bona elecció, sabes lo que te haces.
         </h1>
 
-        <img src="spidermandancing.gif">
+        <img src="spiderman-dancing.gif">
 
         <br>
 
@@ -161,40 +164,39 @@ yesButton.addEventListener("click", function() {
 function goNext() {
 
     document.body.innerHTML = `
-        <h1 style="margin-top:60px;">
-            Para celebrar ese "sí", después de la peli te invito a cenar. Eliges tu. 
+        <h1 style="margin-top:40px;">
+            Para celebrar ese "sí", después de la peli te invito a cenar. Eliges tú.
         </h1>
 
         <div class="sushi-grid">
 
             <div class="sushi-item" onclick="finalScreen()">
-                <img src="https://source.unsplash.com/400x300/?sushi">
+                <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c">
                 <p>Sushi</p>
             </div>
 
             <div class="sushi-item" onclick="finalScreen()">
-                <img src="https://source.unsplash.com/401x300/?sushi">
+                <img src="https://images.unsplash.com/photo-1553621042-f6e147245754">
                 <p>Sushi</p>
             </div>
 
             <div class="sushi-item" onclick="finalScreen()">
-                <img src="https://source.unsplash.com/402x300/?sushi">
+                <img src="https://images.unsplash.com/photo-1582450871972-ab5ca641643d">
                 <p>Sushi</p>
             </div>
 
             <div class="sushi-item" onclick="finalScreen()">
-                <img src="https://source.unsplash.com/403x300/?sushi">
+                <img src="https://images.unsplash.com/photo-1562158070-57b5b06e5097">
                 <p>Sushi</p>
             </div>
 
         </div>
 
-        <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHQxam1vbmJkMjBmMDdpYXYwM2F5ZWVzdXJveWR1OWg3YWg1c3BobCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/H986cBWlQH0PXjcLQO/giphy.gif" style="margin-top:50px;">
+        <img src="https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif" style="margin-top:40px;">
     `;
 }
 
 function finalScreen() {
-
     document.body.innerHTML = `
         <h1 style="margin-top:120px;">
             Bof sushi, que top. 😌
