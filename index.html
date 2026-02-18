@@ -5,7 +5,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet">
 
-    <!-- Librería confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
@@ -106,3 +105,221 @@
         .summary-card {
             background: #f2f2f2;
             border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            margin: 40px auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 2;
+        }
+
+        .confirm-btn {
+            background: linear-gradient(90deg, #ff4f87, #ff2d6f);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 40px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .celebration {
+            background: radial-gradient(circle at top, #ff4f87, #ff9ecb);
+        }
+
+        .heart {
+            position: fixed;
+            font-size: 24px;
+            animation: floatUp 4s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(1); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+
+<body>
+
+<audio id="bgMusic" src="musica.mp3"></audio>
+
+<div id="content">
+
+    <h1>
+        Iba a pedirte tu Letterboxd, pero mejor aprovecho la oportunidad 
+        para proponerte ver una peli juntos.  
+        El 31 de Julio.  
+        Com ho veus?
+    </h1>
+
+    <img src="nottinghill.gif" class="main-gif">
+
+    <div class="buttons">
+        <button id="yes">Sí</button>
+        <button id="no">No</button>
+    </div>
+
+</div>
+
+<script>
+
+let yesButton = document.getElementById("yes");
+let noButton = document.getElementById("no");
+let container = document.querySelector(".buttons");
+
+let yesSize = 20;
+let noClicks = 0;
+let initialTop = noButton.offsetTop;
+
+let phrases = [
+    "¿Seguraa?",
+    "Insisto",
+    "Mira que me lo he currado ehh",
+    "Vaa venga...",
+    "Última oportunidad...",
+    "cabrona JAJAJA"
+];
+
+noButton.addEventListener("click", function() {
+
+    if (noClicks >= phrases.length) {
+        noButton.style.display = "none";
+        return;
+    }
+
+    noButton.innerText = phrases[noClicks];
+
+    yesSize += 35;
+    yesButton.style.fontSize = yesSize + "px";
+
+    let maxX = container.clientWidth - noButton.offsetWidth;
+    let maxY = initialTop;
+
+    noButton.style.left = Math.random() * maxX + "px";
+    noButton.style.top = Math.random() * maxY + "px";
+
+    noClicks++;
+});
+
+yesButton.addEventListener("click", function() {
+
+    document.getElementById("content").innerHTML = `
+        <div style="margin-top:80px;">
+            <h1>bona elecció, para nada obligada eh 😌</h1>
+            <img src="spiderman.gif" style="width:500px; margin:40px 0;">
+            <br>
+            <button onclick="goNext()" 
+            style="margin-top:30px; background:#ff4f87; color:white; font-size:18px; border:none; padding:15px 30px; border-radius:40px; cursor:pointer;">
+                CLICA AQUÍ
+            </button>
+        </div>
+    `;
+});
+
+function goNext() {
+
+    document.getElementById("content").innerHTML = `
+        <div>
+            <h1>Para celebrar ese "sí", después de la peli te invito a cenar 😌</h1>
+
+            <div class="layout-row">
+
+                <img src="yoda.gif" 
+                     style="width:420px; margin-right:20px; margin-left:-40px;">
+
+                <div class="sushi-grid">
+
+                    <div class="sushi-item" onclick="finalScreen()">
+                        <img src="sushi1.jpg">
+                        <p>Sushi</p>
+                    </div>
+
+                    <div class="sushi-item" onclick="finalScreen()">
+                        <img src="sushi2.jpg">
+                        <p>Sushi</p>
+                    </div>
+
+                    <div class="sushi-item" onclick="finalScreen()">
+                        <img src="sushi3.jpg">
+                        <p>Sushi</p>
+                    </div>
+
+                    <div class="sushi-item" onclick="finalScreen()">
+                        <img src="sushi4.jpg">
+                        <p>Sushi</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    `;
+}
+
+function finalScreen() {
+
+    document.getElementById("content").innerHTML = `
+        <div style="margin-top:80px;">
+            <h1>boff, decisión top 😌</h1>
+
+            <div class="final-text">
+                Y ya sabes lo que dicen: la felicidad no es completa sin una cabra tocando el violín. 
+                (lo de tocar el violín ya se me complica un poco más eso sí, pero todo es ponerse).
+            </div>
+
+            <div class="summary-card">
+                <h2>Laia Diaz</h2>
+                <p>Vista previa de tu invitación</p>
+
+                <p><strong>📅 31 de Julio de 2026</strong></p>
+                <p><strong>⏰ 19:00</strong></p>
+                <p>🎬 Película</p>
+                <p>🍣 Sushi</p>
+
+                <button class="confirm-btn" onclick="confirmInvitation()">
+                    CONFIRMAR INVITACIÓN
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function confirmInvitation() {
+
+    document.body.classList.add("celebration");
+
+    document.getElementById("bgMusic").play();
+
+    for(let i=0; i<30; i++){
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (3 + Math.random() * 2) + "s";
+        document.body.appendChild(heart);
+    }
+
+    var duration = 3000;
+    var end = Date.now() + duration;
+
+    (function frame() {
+        confetti({
+            particleCount: 5,
+            spread: 70
+        });
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
+    }());
+
+    setTimeout(function() {
+        window.open("https://wa.me/TUNUMERO?text=Confirmo%20la%20invitación%20del%2031%20de%20julio%20😌", "_blank");
+    }, 2500);
+}
+
+</script>
+
+</body>
+</html>
