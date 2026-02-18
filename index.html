@@ -27,7 +27,7 @@
         }
 
         .main-gif {
-            width: 420px;
+            width: 650px;
             margin: 40px 0;
         }
 
@@ -189,12 +189,11 @@ let noClicks = 0;
 let initialTop = noButton.offsetTop;
 
 let phrases = [
-    "No seas así",
-    "Va venga...",
-    "¿Seguro?",
+    "¿Seguraa?",
+    "Insisto",
     "Mira que me lo he currado ehh",
+    "Vaa venga...",
     "Última oportunidad...",
-    "Mira que insisto eh",
     "cabrona JAJAJA"
 ];
 
@@ -227,7 +226,7 @@ yesButton.addEventListener("click", function() {
     document.getElementById("content").innerHTML = `
         <div class="fade">
             <h1 style="margin-top:80px;">
-                bona elecció, para nada obligada ehh
+                bona elecció, para nada obligada eh
             </h1>
 
             <img src="spiderman.gif" style="width:500px; margin:40px 0;">
@@ -289,23 +288,23 @@ function finalScreen() {
     document.getElementById("content").innerHTML = `
         <div class="fade">
             <h1 style="margin-top:80px;">
-                boff, sushi que toop 😌
+                boff, decisión top 😌
             </h1>
 
             <div class="final-text">
-                Y hasta aquí. Y ya sabes lo que dicen: la felicidad no es felicidad sin una cabra tocando el violín. 
+                Y hasta aquí. Y ya sabes lo que dicen: la felicidad no es completa sin una cabra tocando el violín. 
                 (lo de tocar el violín ya se me complica un poco más eso sí, pero todo es ponerse).
             </div>
 
             <div class="summary-card">
-                <h2>ALMOST THERE!</h2>
-                <p>Vista previa de tu invitación interactiva</p>
+                <h2>Laia Diaz</h2>
+                <p>Vista previa de tu invitación </p>
 
                 <div class="summary-content">
                     <p><strong>📅 31 de Julio de 2026</strong></p>
                     <p><strong>⏰ 19:00</strong></p>
-                    <p>🍣 Tu elección: Sushi</p>
                     <p>🎬 Actividad: Película</p>
+                    <p>🍣 Tu elección: Sushi</p>
                 </div>
 
                 <button class="confirm-btn" onclick="alert('Invitación confirmada 😌')">
