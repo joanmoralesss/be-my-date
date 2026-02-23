@@ -4,7 +4,6 @@
     <title> perdó per la frikada </title>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet">
-
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
@@ -27,7 +26,6 @@
         }
 
         img { border-radius: 12px; }
-
         .main-gif { width: 650px; margin: 40px 0; }
 
         .buttons {
@@ -102,8 +100,6 @@
             max-width: 500px;
             margin: 40px auto;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            position: relative;
-            z-index: 2;
         }
 
         .confirm-btn {
@@ -119,27 +115,15 @@
         .celebration {
             background: radial-gradient(circle at top, #ff4f87, #ff9ecb);
         }
-
-        .heart {
-            position: fixed;
-            font-size: 24px;
-            animation: floatUp 4s linear infinite;
-            opacity: 0.8;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(1); opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
-        }
     </style>
 </head>
 
 <body>
 
-<!-- Audios -->
 <audio id="introMusic" src="nothinghillcancion.mp3"></audio>
 <audio id="bgMusic" src="musica.mp3"></audio>
 <audio id="yodaMusic" src="yodaruido.mp3"></audio>
+<audio id="celebrationMusic" src="celebracion.mp3"></audio>
 
 <div id="content">
 
@@ -163,9 +147,16 @@
 let introMusic = document.getElementById("introMusic");
 let bgMusic = document.getElementById("bgMusic");
 let yodaMusic = document.getElementById("yodaMusic");
+let celebrationMusic = document.getElementById("celebrationMusic");
 
-window.addEventListener("load", function(){
-    introMusic.play().catch(()=>{});
+let introStarted = false;
+
+/* PRIMER CLICK EN CUALQUIER PARTE EXCEPTO "SÍ" */
+document.addEventListener("click", function(e){
+    if(!introStarted && e.target.id !== "yes"){
+        introMusic.play().catch(()=>{});
+        introStarted = true;
+    }
 });
 
 let yesButton = document.getElementById("yes");
@@ -193,7 +184,6 @@ noButton.addEventListener("click", function() {
     }
 
     noButton.innerText = phrases[noClicks];
-
     yesSize += 35;
     yesButton.style.fontSize = yesSize + "px";
 
@@ -208,9 +198,11 @@ noButton.addEventListener("click", function() {
 
 yesButton.addEventListener("click", function() {
 
+    /* DETENER CANCIÓN INICIAL */
     introMusic.pause();
     introMusic.currentTime = 0;
 
+    /* EMPEZAR MUSICA SPIDERMAN */
     bgMusic.play().catch(()=>{});
 
     document.getElementById("content").innerHTML = `
@@ -235,7 +227,7 @@ function goNext() {
 
     document.getElementById("content").innerHTML = `
         <div>
-            <h1>Para celebrar ese "sí", después de la peli te invito a cenar. tu eliges: </h1>
+            <h1>para celebrar ese "sí", después de la peli te invito a cenar. tu eliges: </h1>
 
             <div class="layout-row">
 
@@ -243,29 +235,19 @@ function goNext() {
                      style="width:420px; margin-right:20px; margin-left:-40px;">
 
                 <div class="sushi-grid">
-
                     <div class="sushi-item" onclick="finalScreen()">
-                        <img src="sushi1.jpg">
-                        <p>Sushi</p>
+                        <img src="sushi1.jpg"><p>Sushi</p>
                     </div>
-
                     <div class="sushi-item" onclick="finalScreen()">
-                        <img src="sushi2.jpg">
-                        <p>Sushi</p>
+                        <img src="sushi2.jpg"><p>Sushi</p>
                     </div>
-
                     <div class="sushi-item" onclick="finalScreen()">
-                        <img src="sushi3.jpg">
-                        <p>Sushi</p>
+                        <img src="sushi3.jpg"><p>Sushi</p>
                     </div>
-
                     <div class="sushi-item" onclick="finalScreen()">
-                        <img src="sushi4.jpg">
-                        <p>Sushi</p>
+                        <img src="sushi4.jpg"><p>Sushi</p>
                     </div>
-
                 </div>
-
             </div>
         </div>
     `;
@@ -278,11 +260,10 @@ function finalScreen() {
             <h1>pues hasta aquí, </h1>
 
             <div class="final-text">
-            espero que esto haya sido lo suficientemente surrealista, pero bonito.
+            espero haber logrado que esto haya sido surrealista, pero bonito.
             </div>
 
             <div class="summary-card">
-
                 <p><strong>📅 31 de Julio de 2026</strong></p>
                 <p><strong>⏰ 19:00</strong></p>
                 <p>🎬 Película</p>
@@ -297,6 +278,8 @@ function finalScreen() {
 }
 
 function confirmInvitation() {
+
+    celebrationMusic.play().catch(()=>{});
 
     document.body.classList.add("celebration");
 
