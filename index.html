@@ -4,6 +4,7 @@
     <title>jajaja perdó per la frikada </title>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
@@ -29,7 +30,11 @@
 
         .main-gif { width: 650px; margin: 40px 0; }
 
-        .buttons { position: relative; height: 300px; margin-top: 30px; }
+        .buttons {
+            position: relative;
+            height: 300px;
+            margin-top: 30px;
+        }
 
         button {
             padding: 15px 35px;
@@ -97,11 +102,14 @@
             max-width: 500px;
             margin: 40px auto;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 2;
         }
 
         .confirm-btn {
             background: linear-gradient(90deg, #ff4f87, #ff2d6f);
             color: white;
+            border: none;
             padding: 15px 40px;
             border-radius: 40px;
             font-size: 16px;
@@ -120,16 +128,18 @@
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(100vh); opacity: 1; }
-            100% { transform: translateY(-10vh); opacity: 0; }
+            0% { transform: translateY(100vh) scale(1); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
     </style>
 </head>
 
 <body>
 
+<!-- Audios -->
+<audio id="introMusic" src="nothinghillcancion.mp3"></audio>
 <audio id="bgMusic" src="musica.mp3"></audio>
-<audio id="celebrationMusic" src="celebracion.mp3"></audio>
+<audio id="yodaMusic" src="yodaruido.mp3"></audio>
 
 <div id="content">
 
@@ -151,22 +161,29 @@
 
 <script>
 
+let introMusic = document.getElementById("introMusic");
+let bgMusic = document.getElementById("bgMusic");
+let yodaMusic = document.getElementById("yodaMusic");
+
+window.addEventListener("load", function(){
+    introMusic.play().catch(()=>{});
+});
+
 let yesButton = document.getElementById("yes");
 let noButton = document.getElementById("no");
-let music = document.getElementById("bgMusic");
-let celebrationMusic = document.getElementById("celebrationMusic");
+let container = document.querySelector(".buttons");
 
 let yesSize = 20;
 let noClicks = 0;
 let initialTop = noButton.offsetTop;
 
 let phrases = [
-    "¿Seguraa?",
+    "¿Segura?",
     "Insisto",
-    "Mira que me lo he currado ehh",
-    "Vaa venga...",
+    "Mira que me lo he currado...",
+    "Eres persistente eh...",
     "Última oportunidad...",
-    "cabrona JAJAJA"
+    "cabronaJAJAJAJ"
 ];
 
 noButton.addEventListener("click", function() {
@@ -181,7 +198,7 @@ noButton.addEventListener("click", function() {
     yesSize += 35;
     yesButton.style.fontSize = yesSize + "px";
 
-    let maxX = document.querySelector(".buttons").clientWidth - noButton.offsetWidth;
+    let maxX = container.clientWidth - noButton.offsetWidth;
     let maxY = initialTop;
 
     noButton.style.left = Math.random() * maxX + "px";
@@ -192,12 +209,14 @@ noButton.addEventListener("click", function() {
 
 yesButton.addEventListener("click", function() {
 
-    music.currentTime = 0;
-    music.play();
+    introMusic.pause();
+    introMusic.currentTime = 0;
+
+    bgMusic.play().catch(()=>{});
 
     document.getElementById("content").innerHTML = `
         <div style="margin-top:80px;">
-            <h1>bona elecció, para nada obligada eh</h1>
+            <h1>bona elecció :) </h1>
             <img src="spiderman.gif" style="width:500px; margin:40px 0;">
             <br>
             <button onclick="goNext()" 
@@ -210,20 +229,44 @@ yesButton.addEventListener("click", function() {
 
 function goNext() {
 
-    music.pause();
-    music.currentTime = 0;
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
+
+    yodaMusic.play().catch(()=>{});
 
     document.getElementById("content").innerHTML = `
         <div>
-            <h1>Para celebrar ese "sí", después de la peli te invito a cenar. Tu eliges:</h1>
+            <h1>para celebrar ese "sí", después de la peli te invito a cenar. tú eliges: </h1>
+
             <div class="layout-row">
-                <img src="yoda.gif" style="width:420px; margin-right:20px; margin-left:-40px;">
+
+                <img src="yoda.gif" 
+                     style="width:420px; margin-right:20px; margin-left:-40px;">
+
                 <div class="sushi-grid">
-                    <div class="sushi-item" onclick="finalScreen()"><img src="sushi1.jpg"><p>Sushi</p></div>
-                    <div class="sushi-item" onclick="finalScreen()"><img src="sushi2.jpg"><p>Sushi</p></div>
-                    <div class="sushi-item" onclick="finalScreen()"><img src="sushi3.jpg"><p>Sushi</p></div>
-                    <div class="sushi-item" onclick="finalScreen()"><img src="sushi4.jpg"><p>Sushi</p></div>
+
+                    <div class="sushi-item" onclick="finalScreen()">
+                        <img src="sushi1.jpg">
+                        <p>Sushi</p>
+                    </div>
+
+                    <div class="sushi-item" onclick="finalScreen()">
+                        <img src="sushi2.jpg">
+                        <p>Sushi</p>
+                    </div>
+
+                    <div class="sushi-item" onclick="finalScreen()">
+                        <img src="sushi3.jpg">
+                        <p>Sushi</p>
+                    </div>
+
+                    <div class="sushi-item" onclick="finalScreen()">
+                        <img src="sushi4.jpg">
+                        <p>Sushi</p>
+                    </div>
+
                 </div>
+
             </div>
         </div>
     `;
@@ -233,10 +276,10 @@ function finalScreen() {
 
     document.getElementById("content").innerHTML = `
         <div style="margin-top:80px;">
-            <h1>Y hasta aquí.</h1>
+            <h1>y hasta aquí, </h1>
 
             <div class="final-text">
-                Espero que haya sido lo suficientemente surrealista, pero bonito. 
+                espero que esto haya sido lo suficientemente surrealista, pero bonito.
             </div>
 
             <div class="summary-card">
@@ -255,25 +298,19 @@ function finalScreen() {
 
 function confirmInvitation() {
 
-    celebrationMusic.currentTime = 0;
-    celebrationMusic.play();
-
     document.body.classList.add("celebration");
 
-    for(let i=0; i<30; i++){
-        let heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "💖";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (3 + Math.random() * 2) + "s";
-        document.body.appendChild(heart);
-    }
-
-    var end = Date.now() + 3000;
+    var duration = 3000;
+    var end = Date.now() + duration;
 
     (function frame() {
-        confetti({ particleCount: 5, spread: 70 });
-        if (Date.now() < end) requestAnimationFrame(frame);
+        confetti({
+            particleCount: 5,
+            spread: 70
+        });
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
     }());
 }
 
